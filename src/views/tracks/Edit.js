@@ -48,7 +48,7 @@ export default class TrackEdit extends Component {
     const { id } = this.props.match.params;
 
 
-    axios.get(`/tracks/${id}`)
+    axios.get(REACT_APP_BACKEND ||`http://localhost:4000/tracks/${id}`)
       .then(response => {
         console.log(response);
         var genre = response.data.genre.map(genre => {
@@ -82,7 +82,7 @@ export default class TrackEdit extends Component {
   onDelete = () => {
     const { id } = this.props.match.params;
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken')
-    axios.delete(`http://localhost:4000/tracks/${id}`)
+    axios.delete(REACT_APP_BACKEND || `http://localhost:4000/tracks/${id}`)
       .then((res) => {
         console.log('Student successfully deleted!')
       }).catch((error) => {
@@ -110,7 +110,7 @@ export default class TrackEdit extends Component {
     console.log(track);
 
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken')
-    axios.put(`http://localhost:4000/tracks/${id}`, track)
+    axios.put(REACT_APP_BACKEND || `http://localhost:4000/tracks/${id}`, track)
       .then(res => {
         console.log(res.data);
         this.props.history.push("/");

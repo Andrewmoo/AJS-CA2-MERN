@@ -75,7 +75,7 @@ export default class TrackCreate extends Component {
     console.log(track);
 
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken')
-    axios.post('/tracks', track)
+    axios.post(REACT_APP_BACKEND || 'http://localhost:4000/tracks', track)
       .then(res => {
         console.log(res.data);
         window.location = '/';
