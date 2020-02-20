@@ -38,7 +38,7 @@ export default class Login extends Component {
 
     console.log(user);
 
-    axios.post(REACT_APP_BACKEND || 'http://localhost:4000/account/login', user)
+    axios.post((process.env.REACT_APP_BACKEND || 'http://localhost:4000') + '/account/login', user)
       .then(res => {
         // save token in local storage
         localStorage.setItem('jwtToken', res.data.token);

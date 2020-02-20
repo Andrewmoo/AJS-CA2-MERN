@@ -26,7 +26,7 @@ export default class TrackShow extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
 
-    axios.get(`http://localhost:4000/tracks/${id}`)
+    axios.get((process.env.REACT_APP_BACKEND || 'http://localhost:4000') + `/tracks/${id}`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -49,7 +49,7 @@ export default class TrackShow extends Component {
   onDelete = () => {
     const { id } = this.props.match.params;
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken')
-    axios.delete(REACT_APP_BACKEND || `http://localhost:4000/tracks/${id}`)
+    axios.delete((process.env.REACT_APP_BACKEND || 'http://localhost:4000') + `/tracks/${id}`)
       .then((res) => {
         console.log('Student successfully deleted!')
         window.location = '/';
