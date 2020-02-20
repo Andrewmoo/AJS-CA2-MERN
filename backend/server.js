@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const tracksRouter = require('./routes/tracks');
 const authRouter = require('./routes/auth');
 const app = express();
-const path = require('path');
 
 app.use(body_parser.json());
 app.use(cors());
@@ -14,7 +13,7 @@ app.use(cors());
 
 const uri = process.env.ATLAS_URI;
 
-mongoose.connect(process.env.MONGODB_URI || uri, {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true
 });
@@ -33,14 +32,6 @@ app.use('/tracks', tracksRouter);
 app.use('/account', authRouter);
 
 
-//Serve Static assets
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('build'));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-  });
-}
 
 const port = process.env.PORT || 4000;
 
