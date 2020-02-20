@@ -48,7 +48,7 @@ export default class TrackEdit extends Component {
     const { id } = this.props.match.params;
 
 
-    axios.get(REACT_APP_BACKEND ||`http://localhost:4000/tracks/${id}`)
+    axios.get((process.env.REACT_APP_BACKEND || 'http://localhost:4000') + `/tracks/${id}`)
       .then(response => {
         console.log(response);
         var genre = response.data.genre.map(genre => {
