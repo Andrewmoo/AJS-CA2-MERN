@@ -23,7 +23,7 @@ export default class TrackIndex extends Component {
   }
 
   componentDidMount() {
-    axios.get((process.env.REACT_APP_BACKEND || 'http://localhost:4000') + "/tracks/")
+    axios.get((process.env.REACT_APP_BACKEND || 'http://localhost:4000') + "tracks/")
       .then(response => {
         console.log(response);
         this.setState({
